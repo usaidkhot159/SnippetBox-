@@ -1,0 +1,81 @@
+/* ── Syntax Highlight Overrides ── */
+.hljs {
+  background: var(--bg-void) !important;
+  color: #ABB2BF !important;
+}
+
+/* Line numbers */
+.code-with-lines {
+  display: flex;
+  overflow-x: auto;
+}
+
+.line-numbers {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) var(--space-3) var(--space-4) var(--space-4);
+  background: var(--bg-void);
+  border-right: 1px solid var(--border-subtle);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.line-number {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  text-align: right;
+  min-width: 1.5rem;
+}
+
+.code-lines {
+  flex: 1;
+  overflow-x: auto;
+  padding: var(--space-4);
+}
+
+.code-lines code {
+  font-family: var(--font-mono) !important;
+  font-size: 0.82rem !important;
+  line-height: 1.8 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  white-space: pre;
+}
+
+/* Theme: Atom One Dark variant (our custom tint) */
+.hljs-comment,
+.hljs-quote { color: #5C6370; font-style: italic; }
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in { color: #C678DD; }
+
+.hljs-number,
+.hljs-literal { color: #D19A66; }
+
+.hljs-string,
+.hljs-template-string { color: #98C379; }
+
+.hljs-title,
+.hljs-section,
+.hljs-attribute { color: #61AFEF; }
+
+.hljs-variable,
+.hljs-template-variable { color: #E06C75; }
+
+.hljs-tag .hljs-name { color: #E06C75; }
+.hljs-tag .hljs-attr { color: #D19A66; }
+
+.hljs-type,
+.hljs-class .hljs-title { color: #E5C07B; }
+
+.hljs-function .hljs-title { color: #61AFEF; }
+
+.hljs-params { color: #ABB2BF; }
+
+.hljs-operator,
+.hljs-punctuation { color: #ABB2BF; }
+
+.hljs-meta { color: #61AFEF; }
