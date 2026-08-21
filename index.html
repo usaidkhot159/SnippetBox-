@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnippetBox — Personal Code Snippet Manager</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+  <link rel="stylesheet" href="css/palette.css" />
+  <link rel="stylesheet" href="css/stats.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body>
+
+  <!-- Command Palette Overlay -->
+  <div id="command-palette-overlay" class="palette-overlay" aria-hidden="true">
+    <div class="palette-container" role="dialog" aria-label="Command Palette">
+      <div class="palette-search-row">
+        <span class="palette-icon">⌘</span>
+        <input type="text" id="palette-input" class="palette-input" placeholder="Search commands or snippets…" autocomplete="off" />
+        <kbd class="palette-esc">Esc</kbd>
+      </div>
+      <div id="palette-results" class="palette-results"></div>
+    </div>
+  </div>
+
+  <!-- New/Edit Snippet Modal -->
+  <div id="snippet-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container" role="dialog" aria-label="Snippet Editor">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="modal-dot red"></span>
+          <span class="modal-dot yellow"></span>
+          <span class="modal-dot green"></span>
+          <span id="modal-title-label" class="modal-title-label">New Snippet</span>
+        </div>
+        <button class="modal-close" id="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- View Snippet Modal -->
+  <div id="view-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container modal-container--view" role="dialog" aria-label="View Snippet">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="modal-dot red"></span>
+          <span class="modal-dot yellow"></span>
+          <span class="modal-dot green"></span>
+          <span id="view-modal-lang" class="modal-lang-badge"></span>
+        </div>
+        <button class="modal-close" id="view-modal-close-btn" aria-label="Close">✕</button>
+      </div>
+      <div id="view-modal-body" class="view-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Stats Panel -->
+  <div id="stats-panel" class="stats-panel" aria-hidden="true">
+    <div id="stats-panel-inner"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Keyboard Shortcut hint -->
+  <div class="shortcut-hint">Press <kbd>Ctrl+K</kbd> to open Command Palette</div>
+
+  <!-- App Shell -->
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-bolt">⚡</span>
+        <span class="brand-name">SnippetBox</span>
+      </div>
+
+      <button class="btn-new-snippet" id="new-snippet-btn">
+        <span class="btn-new-icon">+</span>
+        <span>New Snippet</span>
+        <kbd class="shortcut-badge">⌘N</kbd>
+      </button>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Library</div>
+        <ul class="nav-list" id="nav-list">
+          <li class="nav-item active" data-filter="all">
+            <span class="nav-icon">◈</span> All Snippets
+            <span class="nav-count" id="count-all">0</span>
+          </li>
+          <li class="nav-item" data-filter="favorites">
+            <span class="nav-icon">⭐</span> Favorites
+            <span class="nav-count" id="count-favorites">0</span>
+          </li>
+          <li class="nav-item" data-filter="pinned">
+            <span class="nav-icon">📌</span> Pinned
+            <span class="nav-count" id="count-pinned">0</span>
+          </li>
+          <li class="nav-item" data-filter="recent">
+            <span class="nav-icon">🕐</span> Recently Used
+          </li>
+        </ul>
+
+        <div class="nav-section-label">Categories</div>
+        <ul class="nav-list" id="category-nav"></ul>
+
+        <div class="nav-section-label">Tags</div>
+        <div class="tag-cloud" id="tag-cloud"></div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-footer-btn" id="stats-btn">
+          <span>📊</span> Statistics
+        </button>
+        <button class="sidebar-footer-btn" id="export-btn">
+          <span>📦</span> Export
+        </button>
+        <button class="sidebar-footer-btn" id="import-btn">
+          <span>📥</span> Import
+        </button>
+        <input type="file" id="import-file-input" accept=".json" style="display:none" />
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="view-title" id="view-title">All Snippets</h1>
+        </div>
+        <div class="topbar-right">
+          <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search snippets…" autocomplete="off" />
+            <kbd class="search-shortcut">⌘K</kbd>
+          </div>
+          <div class="lang-filter" id="lang-filter"></div>
+        </div>
+      </header>
+
+      <!-- Snippet of the Day -->
+      <div id="sotd-banner" class="sotd-banner"></div>
+
+      <!-- Cards Grid -->
+      <section class="cards-grid" id="cards-grid">
+        <div class="empty-state" id="empty-state" style="display:none">
+          <div class="empty-icon">◈</div>
+          <div class="empty-title">No snippets here</div>
+          <div class="empty-sub">Create your first snippet with <kbd>Ctrl+N</kbd></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
