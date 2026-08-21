@@ -1,0 +1,98 @@
+:root {
+  /* ── Background ── */
+  --bg-void:        #07070E;
+  --bg-surface:     #0F0F1A;
+  --bg-elevated:    #161625;
+  --bg-overlay:     #1E1E30;
+  --bg-hover:       #242438;
+
+  /* ── Violet Primary ── */
+  --violet-900:     #2E1065;
+  --violet-700:     #6D28D9;
+  --violet-600:     #7C3AED;
+  --violet-500:     #8B5CF6;
+  --violet-400:     #A78BFA;
+  --violet-300:     #C4B5FD;
+
+  /* ── Cyan Accent ── */
+  --cyan-500:       #06B6D4;
+  --cyan-400:       #22D3EE;
+  --cyan-300:       #67E8F9;
+
+  /* ── Amber / Warning ── */
+  --amber-400:      #FBBF24;
+
+  /* ── Emerald / Success ── */
+  --emerald-400:    #34D399;
+
+  /* ── Rose / Danger ── */
+  --rose-400:       #F87171;
+
+  /* ── Text ── */
+  --text-primary:   #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted:     #475569;
+  --text-placeholder: #334155;
+
+  /* ── Borders ── */
+  --border-subtle:  #1E2235;
+  --border-default: #252840;
+  --border-strong:  #334155;
+
+  /* ── Typography ── */
+  --font-display:   'Syne', sans-serif;
+  --font-body:      'Inter', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+
+  /* ── Spacing ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Radius ── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg:  0 8px 40px rgba(0,0,0,0.6);
+  --shadow-glow-violet: 0 0 20px rgba(124, 58, 237, 0.25);
+  --shadow-glow-cyan:   0 0 20px rgba(34, 211, 238, 0.2);
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast:   120ms;
+  --duration-normal: 220ms;
+  --duration-slow:   350ms;
+
+  /* ── Layout ── */
+  --sidebar-width: 240px;
+  --topbar-height: 68px;
+}
+
+/* Language color tags */
+.lang-js,   .lang-javascript   { --lang-color: #F7DF1E; }
+.lang-ts,   .lang-typescript   { --lang-color: #3178C6; }
+.lang-py,   .lang-python       { --lang-color: #3776AB; }
+.lang-css                       { --lang-color: #1572B6; }
+.lang-html                      { --lang-color: #E34F26; }
+.lang-cpp, .lang-c\+\+         { --lang-color: #00599C; }
+.lang-c                         { --lang-color: #A8B9CC; }
+.lang-java                      { --lang-color: #ED8B00; }
+.lang-rust                      { --lang-color: #CE422B; }
+.lang-go                        { --lang-color: #00ADD8; }
+.lang-bash, .lang-shell        { --lang-color: #89E051; }
+.lang-sql                       { --lang-color: #CC2927; }
+.lang-other                     { --lang-color: #7C3AED; }
