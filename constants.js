@@ -1,0 +1,32 @@
+export const LANGUAGES = [
+  'JavaScript',
+  'TypeScript',
+  'Python',
+  'CSS',
+  'HTML',
+  'C++',
+  'C',
+  'Java',
+  'Rust',
+  'Go',
+  'Bash',
+  'SQL',
+  'Other',
+];
+
+export const CATEGORIES = [
+  'Frontend',
+  'Backend',
+  'Algorithms',
+  'Data Structures',
+  'CSS Tricks',
+  'Utilities',
+  'API',
+  'Database',
+  'React',
+  'Node.js',
+  'LeetCode',
+  'Security',
+  'DevOps',
+  'Uncategorized',
+];
